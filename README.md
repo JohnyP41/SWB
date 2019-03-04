@@ -1,1 +1,1 @@
-# SWB
+# Systemy wbudowane
