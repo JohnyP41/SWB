@@ -71,7 +71,25 @@ endmodule
 
 ---zadD1.1---
 
+module dec_to_hex(dec, hex);
+input [3:0] dec;
+output reg [6:0] hex;
 
+always
+case (dec)
+	0: hex = 7'b1000000;
+	1: hex = 7'b1111001;
+	2: hex = 7'b0100100;
+	3: hex = 7'b0110000;
+	4: hex = 7'b0110001;
+	5: hex = 7'b0010010;
+ 	6: hex = 7'b0000010;
+	7: hex = 7'b1111000;
+	8: hex = 7'b0000000;
+	9: hex = 7'b0011000;
+	default: hex = 7'b1111111;
+endcase
+endmodule
 
 ---zadD1.2---
 
