@@ -21,10 +21,10 @@ endmodule
 ---zad1.1 part 3---
 
 module zad1 (KEY, LEDR);
-input[0:1] KEY;
+input[1:0] KEY;
 output[0:0] LEDR;
 
-assign LEDR[0] = ~(KEY[0] & KEY[1]);
+assign LEDR[0] = !KEY[1] | !KEY[0];
 
 endmodule
 
