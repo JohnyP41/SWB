@@ -144,77 +144,109 @@ endmodule
 
 ---zad2.4---
 
-module p2 (SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,dec,hex,hex1,hex2);
+module p2 (SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,dec,hex,hex1,hex2,hex3,hex4);
 
 	input[9:0] SW;
 	input[2:0] KEY;
 	output[8:0] LEDR;
-	output reg[8:0] hex;
-	output reg[8:0] hex1;
-	output reg[8:0] hex2;
+	output reg[9:0] hex;
+	output reg[9:0] hex1;
+	output reg[9:0] hex2;
+	output reg[9:0] hex3;
+	output reg[9:0] hex4;
 	output[6:0] HEX3;
 	output[6:0] HEX2;
 	output[6:0] HEX1;
 	output[6:0] HEX0;
-	output reg[0:8] dec;
-	initial
-	begin
-	hex1 = 0;
-	hex2 = 0;
-	end
+	output reg[0:9] dec;
+
 	
 	always
 	begin
-	if(!KEY[0])
+		if(!KEY[0])
 		begin
-		hex[8:0] = SW[4:0] + SW[9:5];
-		hex1 = hex/100;
-		hex2 = hex%100;
+			hex[9:0] = SW[4:0] + SW[9:5];
+			hex1 = hex/1000;
+			hex2 = (hex/100)%10;
+			hex3 = (hex/10)%10;
+			hex4 = hex%10;
 		end
-	else if(!KEY[1])
+		else if(!KEY[1])
 		begin
-			hex[8:0] = SW[9:5] - SW[4:0];
+			hex[9:0] = SW[9:5] - SW[4:0];
 			if(SW[9:5] < SW[4:0])
-				begin
-					hex1 = 100;
-					hex = SW[4:0] - SW[9:5];
-					hex2 = hex%100;
-				end
+			begin
+				hex1 = 11;
+				hex = SW[4:0] - SW[9:5];
+				hex2 = 10;
+				hex3 = (hex/10)%10;
+				hex4 = hex%10;
+			end
 			else
-				begin
-					hex1 = hex/100;
-					hex2 = hex%100;
-				end
+			begin
+				hex1 = hex/1000;
+				hex2 = (hex/100)%10;
+				hex3 = (hex/10)%10;
+				hex4 = hex%10;
+			end
 		end
-	else if(!KEY[2])
-	begin
-		hex[8:0] = SW[4:0] * SW[9:5];
-		hex1 = hex/100;
-		hex2 = hex%100;
+		else if(!KEY[2])
+		begin
+			hex[9:0] = SW[4:0] * SW[9:5];
+			hex1 = hex/1000;
+			hex2 = (hex/100)%10;
+			hex3 = (hex/10)%10;
+			hex4 = hex%10;
 		end
-	else
+		else
 		begin
 			if(SW[9:5] > 0)
-					begin
-					hex1 = SW[9:5];
-					end
-				else if(SW[9:5] == 0)
-					hex1 = 0;
-				if(SW[4:0] > 0)
-					begin
-					hex2 = SW[4:0];
-					end
-				else if(SW[4:0] == 0)
-					hex2 = 0;
+			begin
+				hex1 = SW[9:5];
+				if(hex1 < 10)
+				begin
+					hex2 = hex1;
+					hex1 = 11;
+				end
+				else
+				begin
+					hex2 = hex1%10;
+					hex1 = hex1/10;
+				end
+			end
+			else if(SW[9:5] == 0)
+			begin
+				hex1 = 11;
+				hex2 = 0;
+			end
+			if(SW[4:0] > 0)
+			begin
+				hex3 = SW[4:0];
+				if(hex3 < 10)
+				begin
+					hex4 = hex3;
+					hex3 = 11;
+				end
+				else
+				begin
+					hex4 = hex3%10;
+					hex3 = hex3/10;
+				end
+			end
+			else if(SW[4:0] == 0)
+			begin
+				hex3 = 11;
+				hex4 = 0;
+			end
 		end
 	end
-	p22(hex1/10,HEX3);
-	p22(hex1%10,HEX2);
-	p22(hex2/10,HEX1);
-	p22(hex2%10,HEX0);	
+	p22(hex1,HEX3);
+	p22(hex2,HEX2);
+	p22(hex3,HEX1);
+	p22(hex4,HEX0);	
 endmodule	
 module p22(dec, hex);
-		input [8:0] dec;
+		input [9:0] dec;
 		output reg [6:0] hex;
 		always
 		case (dec)
