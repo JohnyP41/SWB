@@ -1,0 +1,7 @@
+# Main makefile
+
+main: main.cpp main.h 
+	g++ main.cpp -o main
+
+clean: 
+	-rm -f *.o main
