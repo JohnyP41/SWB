@@ -1,23 +1,27 @@
-#TODO - Add variables here - compiler, flags...
-BINDIR:=bin
-SRCDIR:=src
-OBJDIR:=obj
-DSTDIR:=..
+CC=g++
+CFLAGS=-c -Wall
+
+BINDIR=bin
+SRCDIR=src
+OBJDIR=obj
+DSTDIR=..
 
 all: build install
 
 build: $(OBJDIR)/libPrint.o
-	#TODO - FILL ME! Create library
+	ar rvs libPrint.a $<
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) $(BINDIR)
-	#TODO - FILL ME! Build .o file.
+$(OBJDIR)/libPrint.o: $(SRCDIR)/libPrint.cpp libPrint.h
+	$(CC) $(CFLAGS) $< -o $@
 
 install: $(DSTDIR)/libPrint.a 
 
 $(DSTDIR)/libPrint.a: $(OBJDIR)/libPrint.o
-	#TODO - FILL ME! Copy lib from bin dir to destination directory - ../
+	cp $< $@
 
-
+.PHONY: clean
 clean:
-	#TODO - FILL ME! Add removal of .o files and ./bin/*
+	rm -f *.a *.o
+	rm -f obj/*
+	rm -f bin/*
 
