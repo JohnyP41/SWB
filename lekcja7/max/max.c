@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 	int n;
 	int i;
-	int m=0;
+	int m=0; //poprawka
 	scanf("%d", &n);
 
 	for (i = 0; i < n; ++i)
