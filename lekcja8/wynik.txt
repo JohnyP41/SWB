@@ -1,0 +1,52 @@
+--przed poprawą
+gprof ./ex1 | less
+
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 60.15      0.12     0.12       14     8.59     8.59  insert_random_values(int*, int)
+ 25.06      0.17     0.05   662225     0.00     0.00  divide(int*, int, int)
+ 10.03      0.19     0.02 13046300     0.00     0.00  swap(int*, int, int)
+  5.01      0.20     0.01        1    10.03    80.20  quicksort(int*, int, int)
+  0.00      0.20     0.00   662225     0.00     0.00  choose_index(int, int)
+  0.00      0.20     0.00       15     0.00     0.00  zeros_in_tab(int*, int)
+  0.00      0.20     0.00        2     0.00     0.00  print_tab(int*, int)
+  0.00      0.20     0.00        1     0.00     0.00  init_tab_with_zeros(int*, int)
+  0.00      0.20     0.00        1     0.00    80.20  sort(int*, int)
+  0.00      0.20     0.00        1     0.00   120.30  init_tab(int*, int)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+
+--po poprawie
+Przyspieszono funkcje divide i quicksort
+gprof ./ex1 | less
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 56.66      0.13     0.13       17     7.67     7.67  swap(int*, int, int)
+ 21.79      0.18     0.05   661839     0.00     0.00  main
+  8.72      0.20     0.02 13336749     0.00     0.00  divide(int*, int, int)
+  8.72      0.22     0.02                             compare(void const*, void const*)
+  4.36      0.23     0.01   661838     0.00     0.00  quicksort(int*, int, int)
+  0.00      0.23     0.00   661838     0.00     0.00  sort(int*, int)
+  0.00      0.23     0.00       18     0.00     0.00  print_tab(int*, int)
+  0.00      0.23     0.00        1     0.00     0.00  choose_index(int, int)
+  0.00      0.23     0.00        1     0.00     0.00  init_tab(int*, int)
+  0.00      0.23     0.00        1     0.00   193.04  __libc_csu_init
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+
