@@ -26,7 +26,6 @@ cumulative a running sum of the number of seconds accounted
  self      the number of seconds accounted for by this
 
 --po poprawie
-Przyspieszono funkcje divide i quicksort
 gprof ./ex1 | less
 
 Each sample counts as 0.01 seconds.
