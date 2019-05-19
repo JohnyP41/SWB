@@ -1,1 +1,1 @@
-s426228@lts:~/Desktop/SWB/lekcja8/src_profile$ valgrind --leak-check=yes ./heapproject 
+valgrind --leak-check=yes ./heapproject 
