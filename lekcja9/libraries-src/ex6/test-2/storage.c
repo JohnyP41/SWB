@@ -1,0 +1,1 @@
+int storage = 42;

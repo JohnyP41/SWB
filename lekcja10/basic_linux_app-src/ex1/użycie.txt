@@ -1,0 +1,2 @@
+./basic_linux_app -s Tytuł -b Treść.
+
